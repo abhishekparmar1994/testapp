@@ -4,30 +4,37 @@
 ## Laravel Version 5.4
 ## Operating System : Ubuntu
 ---------------------------
-## Project Name :TestApp
+## Project Name : TestApp
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects.
 
 - step 1 : composer create-project laravel/laravel demotest 
        	* created database = testapp
+
 - step 2 : edit in .env file in laravel project.
 	* DB_DATABASE=testapp
 	* DB_USERNAME=root
 	* DB_PASSWORD=devindia
+
 - step 3 : making a migration :-
 	* php artisan make:migration create_employee_table --create=employees
 	* Fields Names: id, name, address, contact, gender, date_of_joining, email.
 	* Add this line to BOOT Method in AppServiceProvider to avoide the Syntax error or access violation error :- \Schema::defaultStringLength(191);
 	* php artisan migrate
+
 - step 4 : php artisan make:model Employee -m -r
 	* it will generate model, resource controller, migration file but ignore migration file that we have already created.
+
 - step 5 : php artisan make:seeder EmployeesTableSeeder
 	* imported use Faker\Factory as Faker; inside employeeseeder
 	* php artisan db:seed --class=EmployeesTableSeeder
+	* (GET Method) employee list API URL : 127.0.0.1:8000/api/employee
 
 
-## github
+
 --------------------------------------
+## github
+
 created git repository
 - git init
 - git add . //Adds the files in the local repository

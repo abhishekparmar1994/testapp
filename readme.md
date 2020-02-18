@@ -8,7 +8,8 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects.
 
-- step 1 : composer create-project laravel/laravel demotest 
+- step 1 : 
+	* composer create-project laravel/laravel demotest 
        	* created database = testapp
 
 - step 2 : edit in .env file in laravel project.
@@ -25,10 +26,25 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - step 4 : php artisan make:model Employee -m -r
 	* it will generate model, resource controller, migration file but ignore migration file that we have already created.
 
-- step 5 : php artisan make:seeder EmployeesTableSeeder
+- step 5 : 
+	* php artisan make:seeder EmployeesTableSeeder
 	* imported use Faker\Factory as Faker; inside employeeseeder
 	* php artisan db:seed --class=EmployeesTableSeeder
-	* (GET Method) employee list API URL : 127.0.0.1:8000/api/employee
+	* (GET Method) Employee List API URL : 127.0.0.1:8000/api/employee
+- step 6 :
+	* Composer require yajra/laravel-datatables-oracle
+	* Register in : config/app.php
+		'providers' => [
+		    ...,
+		    Yajra\DataTables\DataTablesServiceProvider::class,
+		]
+
+		'aliases' => [
+		    ...,
+		    'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+		]
+
+	* After set providers and aliases then publish vendor run by following command : php artisan vendor:publish	
 
 
 

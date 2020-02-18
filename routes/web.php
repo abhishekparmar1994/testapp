@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('employees');
 });
 
 // Employee Route
-Route::resource('employee', 'EmployeeController');
+// Route::resource('employee', 'EmployeeController');

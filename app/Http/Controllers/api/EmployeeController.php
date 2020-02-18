@@ -6,6 +6,7 @@ use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables; 
 
 class EmployeeController extends Controller 
 {
@@ -16,7 +17,21 @@ class EmployeeController extends Controller
 				'status' => 'ok',
 				'data' => $employee
 			], 200);
+
 		} catch(\Exception $ex){
+			return response()->json([
+				'status' => 'error',
+				'data' => 'Something Went Wrong.'
+			], 200);
+		}
+	}
+	public function getemployee(){
+		try{
+			$employeelist=Employee::select('id','name','address','contact','gender','date_of_joining','email')->get();
+			return response()->json([
+				'status' => 'ok',
+				'data' => $employeelist
+			], 200);} catch(\Exception $ex){
 			return response()->json([
 				'status' => 'error',
 				'data' => 'Something Went Wrong.'
@@ -27,8 +42,20 @@ class EmployeeController extends Controller
 	public function store(){
 		
 	}
-	public function show(){
+	public function show($id){
 		
+	}
+	public function getemprecord($id){
+		dd($id);
+		try{
+			$employee = Employee::whereId($id)->first();
+			return response()->json($employee);
+		} catch(\Exception $ex){
+			return response()->json([
+				'status' => 'error',
+				'data' => 'Something Went Wrong.'
+			], 200);
+		}
 	}
 	public function edit($id) {
 		try{

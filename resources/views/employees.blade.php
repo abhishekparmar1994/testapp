@@ -17,8 +17,8 @@
 <br>
 <br>
 <form id="form1">
- <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}"> 
-  {{ method_field('PUT') }}
+  <!-- CSFR token for ajax call -->
+    <meta name="_token" content="{{ csrf_token() }}"/>
 <table class="table laravel_datatable  table-bordered table-striped" id="table1">
    <thead>
      <tr>
@@ -128,7 +128,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default"  id="update_data">Update</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="update_data">Update</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -212,21 +212,17 @@ function openEditModal(id){
 
         $('#update_data').click(function(){
           $.ajax({ 
-              headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              },
-              method:"POST",
-              contentType: false,
-              processData: false,
-              url:'/api/employee/'+id,
-              dataType:"json",
+              type: 'PUT',
+              url: 'api/employee/' + id,
               data: {
-                name: $('#emp_name').val(), 
-                address: $('#emp_address').val(), 
-                contact: $('#emp_contact').val(), 
-                gender: $('#gender').val(), 
-                date_of_joining: $('#date_of_joining').val(),
-                email: $('#emp_email').val()
+                'id':id,
+                '_token': $('input[name=_token]').val(),
+                'name': $('#emp_name').val(), 
+                'address': $('#emp_address').val(), 
+                'contact': $('#emp_contact').val(), 
+                'gender': $('#gender').val(),
+                'date_of_joining': $('#date_of_joining').val(),
+                'email': $('#emp_email').val()
               },
               success: function(res){
                 console.log(res);

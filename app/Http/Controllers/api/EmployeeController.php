@@ -73,11 +73,7 @@ class EmployeeController extends Controller
 
 	public function update(Request $request){
 		try{
-			// $data = $request->all();
-   
-			$data = json_decode($request->data);
-			dd($data);
-			$employee = Employee::whereId($id)->first();
+			$employee = Employee::whereId($request->id)->first();
 			$employee->update($request->all());
 			return response()->json([
 				'status' => 'ok',

@@ -25,7 +25,7 @@ class EmployeeController extends Controller
 			], 200);
 		}
 	}
-	public function getemployee(){
+	public function getemployees(){
 		try{
 			$employeelist=Employee::select('id','name','address','contact','gender','date_of_joining','email')->get();
 			return response()->json([
@@ -39,25 +39,24 @@ class EmployeeController extends Controller
 		}
 	}
 
-	public function store(){
-		
-	}
-	public function show($id){
-		
-	}
-	public function getemprecord($id){
-		dd($id);
-		try{
-			$employee = Employee::whereId($id)->first();
-			return response()->json($employee);
-		} catch(\Exception $ex){
-			return response()->json([
-				'status' => 'error',
-				'data' => 'Something Went Wrong.'
-			], 200);
-		}
-	}
-	public function edit($id) {
+	
+	
+	// public function edit($id) {
+	// 	try{
+	// 		$employee = Employee::whereId($id)->first();
+	// 		return response()->json([
+	// 			'status' => 'ok',
+	// 			'data' => $employee
+	// 		], 200);
+	// 	} catch(\Exception $ex){
+	// 		return response()->json([
+	// 			'status' => 'error',
+	// 			'data' => 'Something Went Wrong.'
+	// 		], 200);
+	// 	}
+	// }
+
+	public function getedit($id) {
 		try{
 			$employee = Employee::whereId($id)->first();
 			return response()->json([
@@ -71,8 +70,13 @@ class EmployeeController extends Controller
 			], 200);
 		}
 	}
-	public function update(EmployeeRequest $request, $id){
+
+	public function update(Request $request){
 		try{
+			// $data = $request->all();
+   
+			$data = json_decode($request->data);
+			dd($data);
 			$employee = Employee::whereId($id)->first();
 			$employee->update($request->all());
 			return response()->json([

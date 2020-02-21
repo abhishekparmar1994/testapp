@@ -16,8 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+// Route::get('', ['middleware' => 'cors', function() {
+    
+// }]);
 Route::resource('employee', 'api\EmployeeController');
-Route::get('getemployee','api\EmployeeController@getemployee')->name('employee.list');
-Route::get('getemprecord','api\EmployeeController@getemprecord')->name('getemprecord');
+Route::get('getemployees','api\EmployeeController@getemployees')->name('employee.list');
+Route::get('getedit/{id}','api\EmployeeController@getedit')->name('getedit');
+// Route::get('getemprecord','api\EmployeeController@getemprecord')->name('getemprecord');
 
